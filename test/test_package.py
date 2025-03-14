@@ -58,3 +58,18 @@ class Tests:
             assert (
                 actual in ["heads!", "tails!"]
             ), f"Expected the text returned by coin() to either 'heads!' or 'tails!'.  Instead, it returned '{actual}'."
+
+    def test_play_math(self):
+        pass
+
+
+    def test_play_geo(self):
+        pass
+
+
+    def test_play_vocab(self):
+        pass
+
+
+    def test_play_science(self):
+        pass
