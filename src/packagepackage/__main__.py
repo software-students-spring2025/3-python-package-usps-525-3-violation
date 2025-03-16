@@ -14,8 +14,6 @@ def main():
     coin = package.coin()  # get a line of text
     print(coin)  # print it out
 
-    coin = package.play_vocab('hard', 'both', 5)
-
 
 if __name__ == "__main__":
     # run the main function
