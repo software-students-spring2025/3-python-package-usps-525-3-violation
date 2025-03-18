@@ -171,10 +171,10 @@ def play_science():
       }
       
       print(selected_questions[i])
-      print(f"A: {option_map["A"]}")
-      print(f"B: {option_map["B"]}")
-      print(f"C: {option_map["C"]}")
-      print(f"D: {option_map["D"]}")
+      print(f"A: {option_map['A']}")
+      print(f"B: {option_map['B']}")
+      print(f"C: {option_map['C']}")
+      print(f"D: {option_map['D']}")
       
       ans = input("Please enter A, B, C, or D: ").upper()
       
