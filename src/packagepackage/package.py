@@ -1,4 +1,5 @@
 import random
+import time
 
 def coin():
     val = random.random()
@@ -7,8 +8,60 @@ def coin():
     else:
         return "tails!"
     
-def play_math():
-   pass
+def math_ans(op, num1, num2):
+   if op == 1:
+      return num1 + num2
+   elif op == 2:
+      return num1 - num2
+   elif op == 3:
+      return num1 * num2
+   else:
+      return num1
+    
+def play_math(level, num_questions):
+   low_num = 1
+   level = level.lower()
+   num_correct = 0
+   if level == "easy":
+      high_num = 10
+   elif level == "medium":
+      high_num = 20
+   elif level == "hard":
+      high_num = 50
+   else:
+      print("Please enter a valid difficulty")
+      return
+   
+   start_time = time.time()
+   for i in range(num_questions):
+      #1: +, 2: -, 3: *, 4: /
+      num1 = random.randint(low_num, high_num)
+      num2 = random.randint(low_num, high_num)
+
+      if num1 < num2:
+         #make sure num1 is not smaller than num2
+         temp = num1
+         num1 = num2
+         num2 = temp
+      
+      op_num = random.randint(1,4)
+      ops = "+-*/"
+      correct = math_ans(op_num, num1, num2)
+      if op_num == 4:
+         num1 = num1 * num2
+
+      print(f"{num1} {ops[op_num-1]} {num2} = ")
+      ans = int(input("Input your answer: "))
+      if ans == correct:
+         num_correct += 1
+         print("Correct!")
+      else:
+         print(f"Incorrect. The correct answer was {correct}")
+   end_time = time.time()
+   elapsed_time = end_time - start_time
+   print(f"Well done! {num_correct}/{num_questions} Correct")
+   print(f"Elapsed time: {elapsed_time:.1f} seconds")
+   return num_correct
 
 
 def play_geo():
