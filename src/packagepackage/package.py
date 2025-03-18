@@ -138,4 +138,66 @@ def play_vocab(level, type, num_questions):
 
 
 def play_science():
-   pass
+   questions = {
+      1: "What is the largest planet in our solar system?",
+      2: "What is the fastest animal on land?"
+   }
+   
+   options = {
+      1: ["Mars", "Saturn", "Jupiter", "Ceres"],
+      2: ["Cheetah", "Falcon", "Antelope", "Usain Bolt"]
+   }
+   
+   answers = {
+      1: "Jupiter",
+      2: "Cheetah"
+   }
+   
+   selected_keys = random.sample(list(questions.keys()), 2)
+   selected_questions = {key: questions[key] for key in selected_keys}
+   selected_options = {key: options[key] for key in selected_keys}
+   selected_answers = {key: answers[key] for key in selected_keys}
+   
+   correct = 0
+   total = 0
+   
+   for i in selected_keys:
+      
+      option_map = {
+         'A': selected_options[i][0],
+         'B': selected_options[i][1],
+         'C': selected_options[i][2],
+         'D': selected_options[i][3]
+      }
+      
+      print(selected_questions[i])
+      print(f"A: {option_map["A"]}")
+      print(f"B: {option_map["B"]}")
+      print(f"C: {option_map["C"]}")
+      print(f"D: {option_map["D"]}")
+      
+      ans = input("Please enter A, B, C, or D: ").upper()
+      
+      while ans not in option_map:
+         print("Invalid input. Please enter A, B, C, or D.")
+      
+      if option_map[ans] == selected_answers[i]:
+         print("Correct!")
+         correct += 1
+      else:
+         print(f"Incorrect! The correct answer was {selected_answers[i]}.")
+      print()
+      total += 1
+      
+   if correct / total == 1:
+      result = "Perfect!"
+   elif correct / total >= 0.8:
+      result = "Great!"
+   elif correct / total >= 0.6:
+      result = "Not bad!"
+   elif correct / total >= 0.4:
+      result = "Good effort."
+   elif correct / total >= 0:
+      result = "You need to study more!"
+      
+   print(f"{result} Your score was {correct}/{total}.")
