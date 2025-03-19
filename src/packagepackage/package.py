@@ -321,7 +321,7 @@ def play_science(num_questions=10, difficulty="mix"):
       ans = input("Please enter A, B, C, or D: ").upper()
       
       while ans not in option_map:
-         print("Invalid input. Please enter A, B, C, or D.")
+         ans = input("Invalid input. Please enter A, B, C, or D: ").upper()
       
       if option_map[ans] == selected_answers[i]:
          print("Correct!")
