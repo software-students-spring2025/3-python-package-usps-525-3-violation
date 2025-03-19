@@ -6,7 +6,7 @@ An exercise to create a Python package, build it, test it, distribute it, and us
 - [Tim Xu](https://github.com/timxu23)
 - [Anna Ye](https://github.com/AnnaTheYe)
 - [Jack Wang](https://github.com/JackInTheBox314)
-- [Joylyn Gong] (https://github.com/joylyngong)
+- [Joylyn Gong](https://github.com/joylyngong)
 
 ## Badge
 When done with [badge](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge), PUT HERE!!!
