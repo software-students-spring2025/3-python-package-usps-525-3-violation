@@ -112,6 +112,7 @@ def play_vocab(level, mode, num_questions):
       print(f"D: {options[3]}")
       ans = input("Choose A, B, C, or D: ").upper()
       while ans not in key:
+         print("Invalid option.")
          ans = input("Invalid option. Choose A, B, C, or D: ").upper()
 
 
