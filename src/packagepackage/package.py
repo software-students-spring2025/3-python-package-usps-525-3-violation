@@ -2,14 +2,6 @@ import random
 import time
 from packagepackage.wordbank import wordbank as original_wordbank
 import copy
-
-
-def coin():
-    val = random.random()
-    if val > 0.5:
-        return "heads!"
-    else:
-        return "tails!"
     
 def math_ans(op, num1, num2):
    if op == 1:

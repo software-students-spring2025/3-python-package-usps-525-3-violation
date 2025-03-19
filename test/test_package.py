@@ -36,32 +36,6 @@ class Tests:
         actual = True  # the value we see in reality
         assert actual == expected, "Expected True to be equal to True!"
 
-    def test_coin(self):
-        """
-        Verify coin() function and make sure it returns a non-empty string.
-        Note that for example purposes, we have not used the example_fixture in this test functino.
-        """
-        # since coin returns a string, run it a bunch of times and verify the output
-        for i in range(100):
-            actual = package.coin()
-            assert isinstance(
-                actual, str
-            ), f"Expected coin() to return a string. Instead, it returned {actual}"
-            assert (
-                len(actual) > 0
-            ), f"Expected coin() not to be empty. Instead, it returned a string with {len(actual)} characters"
-
-    def test_content(self):
-        """
-        Make sure that the text returned by the coin() function is actually from the correct poem.
-        """
-        # run a bunch of times and verify the output
-        for i in range(100):
-            actual = package.coin()
-            assert (
-                actual in ["heads!", "tails!"]
-            ), f"Expected the text returned by coin() to either 'heads!' or 'tails!'.  Instead, it returned '{actual}'."
-
     def test_play_math_predetermined(self, monkeypatch):
         """
         Makes sure that the play_math function works with a predetermined set of questions and answers, while correctly answering all questions correctly
