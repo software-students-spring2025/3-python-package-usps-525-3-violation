@@ -343,4 +343,4 @@ def play_science(num_questions=10, difficulty="mix"):
       result = "You need to study more!"
       
    print(f"{result} Your score was {correct}/{total}.")
-   pass
+   return correct
