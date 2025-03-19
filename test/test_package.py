@@ -1,5 +1,6 @@
 import pytest
 from packagepackage import package
+from packagepackage.wordbank import wordbank
 import random
 import re
 from packagepackage.wordbank import wordbank
@@ -187,6 +188,48 @@ class Tests:
         with pytest.raises(ValueError, match="Invalid number"):
             package.play_vocab("easy", "synonyms", "eleven")
 
+    def test_play_vocab_invalid_args(self):
+            '''
+            Test invalid inputs
+            '''
+            # test invalid level
+            # test non strings
+            with pytest.raises(ValueError, match="Invalid difficulty"):
+                package.play_vocab(1405, "synonyms", 5)
+
+            # test invalid strings
+            with pytest.raises(ValueError, match="Invalid difficulty"):
+                package.play_vocab("asoadon", "synonyms", 5)
+
+            # test invalid gamemode
+            # test non strings
+            with pytest.raises(ValueError, match="Invalid gamemode"):
+                package.play_vocab("easy", 67.2, 5)
+
+            # test invalid strings
+            with pytest.raises(ValueError, match="Invalid gamemode"):
+                package.play_vocab("easy", "firefighter", 5)
+
+            # test invalid numbers
+            
+            # test out of range numbers
+            with pytest.raises(ValueError, match="Invalid number"):
+                package.play_vocab("easy", "synonyms", 25)
+
+            with pytest.raises(ValueError, match="Invalid number"):
+                package.play_vocab("easy", "synonyms", 0)
+            
+            with pytest.raises(ValueError, match="Invalid number"):
+                package.play_vocab("easy", "synonyms", -1)
+
+            # test non integers
+            with pytest.raises(ValueError, match="Invalid number"):
+                package.play_vocab("easy", "synonyms", 4.5)
+
+            # test non numbers
+            with pytest.raises(ValueError, match="Invalid number"):
+                package.play_vocab("easy", "synonyms", "eleven")
+
 
 
     def test_play_vocab_levels(self, monkeypatch, capsys):
@@ -320,7 +363,6 @@ class Tests:
         match = re.search(r"(\d+)%", captured.out)
 
         assert int(score_earned/num_questions * 100) == int(match.group(1)), f"Expected calculated score of {int(score_earned * 100/num_questions)}%, received {int(match.group(1))}%"
-
 
 
     def test_play_science(self):

@@ -131,8 +131,11 @@ def play_vocab(level, mode, num_questions):
       print()
    
    print(f"Your total score this game was {score}/{num_questions}: {int(score*100/num_questions)}%")
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 34455ad140d91bf5d8e2df3b99d86a304ab621e0
 
 
 def play_science(num_questions=10, difficulty="mix"):
