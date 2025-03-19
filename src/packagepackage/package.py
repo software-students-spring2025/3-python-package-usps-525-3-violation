@@ -1,5 +1,8 @@
 import random
 import time
+from packagepackage.wordbank import wordbank as original_wordbank
+import copy
+
 
 def coin():
     val = random.random()
@@ -68,93 +71,31 @@ def play_geo():
    pass
 
 
-def play_vocab(level, type, num_questions):
-   wordbank = {
-   "easy": [
-      ("Love", "Like", "Hate"),
-      ("Happy", "Joyful", "Sad"),
-      ("Fast", "Quick", "Slow"),
-      ("Big", "Large", "Small"),
-      ("Easy", "Simple", "Difficult"),
-      ("Loud", "Noisy", "Quiet"),
-      ("Hot", "Warm", "Cold"),
-      ("Dark", "Dim", "Bright"),
-      ("Strong", "Powerful", "Weak"),
-      ("Clean", "Tidy", "Messy"),
-      ("Friendly", "Kind", "Mean"),
-      ("Soft", "Gentle", "Rough"),
-      ("Smart", "Clever", "Dumb"),
-      ("Fun", "Enjoyable", "Boring"),
-      ("Shout", "Yell", "Whisper"),
-      ("Wet", "Damp", "Dry"),
-      ("Brave", "Courageous", "Fearful"),
-      ("Thin", "Slim", "Thick"),
-      ("New", "Fresh", "Old"),
-      ("Safe", "Secure", "Dangerous")
-   ],
-   "medium": [
-      ("Muted", "Faint", "Blaring"),
-      ("Strong", "Robust", "Weak"),
-      ("Bright", "Radiant", "Dim"),
-      ("Lazy", "Idle", "Energetic"),
-      ("Sharp", "Pointed", "Dull"),
-      ("Brisk", "Lively", "Sluggish"),
-      ("Famous", "Renowned", "Obscure"),
-      ("Shy", "Timid", "Bold"),
-      ("Smooth", "Even", "Rough"),
-      ("Lucky", "Fortunate", "Hapless"),
-      ("Heavy", "Weighty", "Light"),
-      ("Neat", "Orderly", "Messy"),
-      ("Curious", "Inquisitive", "Indifferent"),
-      ("Deep", "Profound", "Shallow"),
-      ("Proud", "Confident", "Ashamed"),
-      ("Polite", "Courteous", "Rude"),
-      ("Brilliant", "Intelligent", "Foolish"),
-      ("Chilly", "Cool", "Warm"),
-      ("Tough", "Sturdy", "Fragile"),
-      ("Eager", "Keen", "Reluctant")
-   ],
-   "hard": [
-      ("Precise", "Exact", "Vague"),
-      ("Maelstrom", "Turmoil", "Tranquil"),
-      ("Tedious", "Boring", "Exciting"),
-      ("Eloquent", "Articulate", "Incoherent"),
-      ("Diligent", "Industrious", "Indolent"),
-      ("Frugal", "Thrifty", "Wasteful"),
-      ("Arrogant", "Haughty", "Humble"),
-      ("Elucidate", "Clarify", "Obfuscate"),
-      ("Complex", "Complicated", "Simple"),
-      ("Exultant", "Jubilant", "Melancholic"),
-      ("Elusive", "Evasive", "Obvious"),
-      ("Ostentatious", "Flamboyant", "Modest"),
-      ("Meticulous", "Punctilious", "Negligent"),
-      ("Gregarious", "Sociable", "Introverted"),
-      ("Impartial", "Nonpartisan", "Prejudiced"),
-      ("Fickle", "Inconsistent", "Reliable"),
-      ("Clandestine", "Secret", "Overt"),
-      ("Phlegmatic", "Placid", "Temperamental"),
-      ("Lethargic", "Sluggish", "Energetic"),
-      ("Amicable", "Cordial", "Hostile")
-   ]
-   }
+def play_vocab(level, mode, num_questions):
+   wordbank = copy.deepcopy(original_wordbank)
+   if level not in ['easy', 'medium', 'hard']:
+      raise ValueError("Invalid difficulty. Please choose from easy, medium, or difficult")
+   if mode not in ['synonyms', 'antonyms', 'both']:
+      raise ValueError("Invalid gamemode. Please choose from synonyms, antonyms, or both")
+   if not isinstance(num_questions, int) or num_questions != max(min(int(num_questions), 15), 1):
+      raise ValueError("Invalid number of questions. Please enter an integer between 1 and 15")
 
+   score = 0
 
-   for i in range(max(min(int(num_questions), 15), 0)):
+   for i in range(num_questions):
       word = random.choice(wordbank[level])
       wordbank[level].remove(word)
-      type_names = ["synonym", "antonym"]
-      if type == "synonyms":
+      mode_names = [" synonym", "n antonym"]
+      if mode == "synonyms":
          correct = word[1]
-         type_name = type_names[0]
-      elif type == "antyonyms":
+         mode_name = mode_names[0]
+      elif mode == "antonyms":
          correct = word[2]
-         type_name = type_names[1]
-      elif type == "both":
-         type_num = random.randint(0, 1)
-         correct = word[type_num + 1]
-         type_name = type_names[type_num]
-      else:
-         return
+         mode_name = mode_names[1]
+      elif mode == "both":
+         mode_num = random.randint(0, 1)
+         correct = word[mode_num + 1]
+         mode_name = mode_names[mode_num]
 
 
       options = {correct}
@@ -172,7 +113,7 @@ def play_vocab(level, type, num_questions):
       }
 
 
-      print(f"Which word is a {type_name} for {word[0]}?")
+      print(f"Which word is a{mode_name} for {word[0]}?")
       print(f"A: {options[0]}")
       print(f"B: {options[1]}")
       print(f"C: {options[2]}")
@@ -184,10 +125,13 @@ def play_vocab(level, type, num_questions):
 
       if key[ans] == correct:
          print("Correct!")
+         score += 1
       else:
          print(f"Incorrect. The correct answer was {correct}")
       print()
-   pass
+   
+   print(f"Your total score this game was {score}/{num_questions}: {int(score*100/num_questions)}%")
+
 
 
 def play_science(num_questions=10, difficulty="mix"):
@@ -321,7 +265,7 @@ def play_science(num_questions=10, difficulty="mix"):
       ans = input("Please enter A, B, C, or D: ").upper()
       
       while ans not in option_map:
-         print("Invalid input. Please enter A, B, C, or D.")
+         ans = input("Invalid input. Please enter A, B, C, or D: ").upper()
       
       if option_map[ans] == selected_answers[i]:
          print("Correct!")
@@ -343,4 +287,4 @@ def play_science(num_questions=10, difficulty="mix"):
       result = "You need to study more!"
       
    print(f"{result} Your score was {correct}/{total}.")
-   pass
+   return correct

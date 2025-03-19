@@ -1,6 +1,8 @@
 import pytest
 from packagepackage import package
 import random
+import re
+from packagepackage.wordbank import wordbank
 
 
 class Tests:
@@ -143,9 +145,204 @@ class Tests:
         pass
 
 
-    def test_play_vocab(self):
-        pass
+    def test_play_vocab_invalid_args(self):
+        '''
+        Test invalid inputs
+        '''
+        # test invalid level
+        # test non strings
+        with pytest.raises(ValueError, match="Invalid difficulty"):
+            package.play_vocab(1405, "synonyms", 5)
+
+        # test invalid strings
+        with pytest.raises(ValueError, match="Invalid difficulty"):
+            package.play_vocab("asoadon", "synonyms", 5)
+
+        # test invalid gamemode
+        # test non strings
+        with pytest.raises(ValueError, match="Invalid gamemode"):
+            package.play_vocab("easy", 67.2, 5)
+
+        # test invalid strings
+        with pytest.raises(ValueError, match="Invalid gamemode"):
+            package.play_vocab("easy", "firefighter", 5)
+
+        # test invalid numbers
+        
+        # test out of range numbers
+        with pytest.raises(ValueError, match="Invalid number"):
+            package.play_vocab("easy", "synonyms", 25)
+
+        with pytest.raises(ValueError, match="Invalid number"):
+            package.play_vocab("easy", "synonyms", 0)
+        
+        with pytest.raises(ValueError, match="Invalid number"):
+            package.play_vocab("easy", "synonyms", -1)
+
+        # test non integers
+        with pytest.raises(ValueError, match="Invalid number"):
+            package.play_vocab("easy", "synonyms", 4.5)
+
+        # test non numbers
+        with pytest.raises(ValueError, match="Invalid number"):
+            package.play_vocab("easy", "synonyms", "eleven")
+
+
+
+    def test_play_vocab_levels(self, monkeypatch, capsys):
+        '''
+        Test that question words and answer options come from wordbank
+        Test that words come from correct level
+        '''
+        difficulty_levels = ["easy", "medium", "hard"]
+        for level in difficulty_levels:
+            valid_q_words = {word[0] for word in wordbank[level]}
+            valid_options = {word[0] for word in wordbank[level]} | {word[1] for word in wordbank[level]} | {word[2] for word in wordbank[level]}
+
+            inputs = iter(["A"] * 10)
+            monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+            
+            package.play_vocab(level, "synonyms", 10)  # start vocab quiz with sample parameters
+            captured = capsys.readouterr()
+            output_words = re.findall(r"Which word is a synonym for (\w+)\?", captured.out)
+
+            # check question words
+            for other_level in difficulty_levels: # make sure level words are correct
+                if other_level != level:
+                    unexpected_words = {word[0] for word in wordbank[other_level]} | {word[1] for word in wordbank[other_level]} | {word[2] for word in wordbank[other_level]}
+                    for word in output_words:
+                        assert word not in unexpected_words, f"Expected only {level} words, {other_level} word '{word}' appeared in {level} level"
+
+            for word in output_words:  # outside wordbank
+                assert word in valid_q_words, f"Received word '{word}' outside {level} wordbank"
+
+            # check answer options
+            answer_options = re.findall(r"[A-Z]: (\w+)", captured.out)
+
+            for other_level in difficulty_levels: # make sure level words are correct
+                if other_level != level:
+                    unexpected_options = {word[0] for word in wordbank[other_level]} | {word[1] for word in wordbank[other_level]} | {word[2] for word in wordbank[other_level]}
+                    for option in answer_options:
+                        assert option not in unexpected_options, f"Expected only {level} options, {other_level} option '{option}' appeared in {level} level"
+            
+            for option in answer_options: # outside wordbank
+                assert option in valid_options, f"Received word '{option}' outside '{level}' wordbank"
+
+
+    def test_play_vocab_modes(self, monkeypatch, capsys):
+        '''
+        Test correct game modes
+        '''
+
+        # test synonyms
+        inputs = iter(["A", "B"] * 4)  # mock user choices
+        monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+
+        package.play_vocab("easy", "synonyms", 8)  # start vocab quiz with sample parameters
+
+        captured = capsys.readouterr()
+
+        assert "Which word is a synonym" in captured.out, f"Expected synonyms, but got none"
+        assert "Which word is an antonym" not in captured.out, f"Expected no antonyms, but got antonyms" # should not ask about antonyms
+
+        # test antonyms
+        inputs = iter(["A", "B"])  # Mock user choices
+        monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+
+        package.play_vocab("easy", "antonyms", 2)  # start vocab quiz with sample parameters
+
+        captured = capsys.readouterr()
+
+        assert "Which word is an antonym" in captured.out, f"Expected antonyms, but got none"
+        assert "Which word is a synonym" not in captured.out, f"Expected no synonyms, but got synonyms"# should not ask about synonyms
+
+        # test both
+        inputs = iter(["A", "B"])  # Mock user choices
+        monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+
+        package.play_vocab("easy", "both", 2)  # start vocab quiz with sample parameters
+
+        captured = capsys.readouterr()
+
+        assert "Which word is a synonym" in captured.out or "Which word is an antonym" in captured.out, f"Expected either antonyms or synonyms, but got neither"
+
+
+    def test_play_vocab_nums(self, monkeypatch, capsys):
+        '''
+        Check that the number of questions is correct
+        '''
+        num_questions = 3  # expected num
+
+        inputs = iter(["A"] * num_questions)
+        monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+
+        package.play_vocab("easy", "synonyms", num_questions)  # start vocab quiz with sample parameters
+
+        captured = capsys.readouterr() 
+
+        # check number of questions asked
+        question_count = captured.out.count("Which word is a")
+
+        assert question_count == num_questions, f"Expected {num_questions} questions, but got {question_count}"
+
+        # check number in final score
+        match = re.search(r"(\d+)/(\d+)", captured.out)
+        assert match, "Could not find score in output"
+        total_num = int(match.group(2))
+
+        assert num_questions == total_num, f"Expected score out of {num_questions}, but got {total_num}"
+
+
+    def test_play_vocab_scoring(self, monkeypatch, capsys):
+        '''
+        Check overall score is correct based on feedback
+        '''
+
+        num_questions = 6
+        inputs = iter(["A"] * num_questions)
+        monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+
+        package.play_vocab("easy", "synonyms", num_questions)  # start vocab quiz with sample parameters
+
+        captured = capsys.readouterr()
+        point_count = captured.out.count("Correct!")
+        incorrect_count = captured.out.count("Incorrect")
+        assert (point_count + incorrect_count) == num_questions, f"Expected {num_questions} total feedback, received {point_count + incorrect_count}"
+
+        match = re.search(r"(\d+)/(\d+)", captured.out)
+
+        assert match, "Could not find score in output"
+        
+        score_earned = int(match.group(1))
+        assert score_earned == point_count, f"Expected score of {point_count}, received {score_earned}"
+        assert 0 <= score_earned <= num_questions, f"Invalid score {score_earned} out of {num_questions}"
+
+        match = re.search(r"(\d+)%", captured.out)
+
+        assert int(score_earned/num_questions * 100) == int(match.group(1)), f"Expected calculated score of {int(score_earned * 100/num_questions)}%, received {int(match.group(1))}%"
+
 
 
     def test_play_science(self):
+        # WIP
+        # # test on easy mode with a random number of questions
+        # num_questions = random.randint(1, 10)
+        # num_correct = package.play_math("easy", num_questions)
+        # expected = num_questions
+        # actual = num_correct
+        # assert expected == actual
+        
+        # # test on hard mode with a random number of questions
+        # num_questions = random.randint(1, 10)
+        # num_correct = package.play_math("hard", num_questions)
+        # expected = num_questions
+        # actual = num_correct
+        # assert expected == actual
+        
+        # # test on mix mode with a random number of questions
+        # num_questions = random.randint(1, 10)
+        # num_correct = package.play_math("mix", num_questions)
+        # expected = num_questions
+        # actual = num_correct
+        # assert expected == actual
         pass
