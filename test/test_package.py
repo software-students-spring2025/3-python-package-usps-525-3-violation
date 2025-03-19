@@ -310,22 +310,70 @@ class Tests:
         # WIP
         # # test on easy mode with a random number of questions
         # num_questions = random.randint(1, 10)
-        # num_correct = package.play_math("easy", num_questions)
+        # num_correct = package.play_science("easy", num_questions)
         # expected = num_questions
         # actual = num_correct
         # assert expected == actual
         
         # # test on hard mode with a random number of questions
         # num_questions = random.randint(1, 10)
-        # num_correct = package.play_math("hard", num_questions)
+        # num_correct = package.play_science("hard", num_questions)
         # expected = num_questions
         # actual = num_correct
         # assert expected == actual
         
         # # test on mix mode with a random number of questions
         # num_questions = random.randint(1, 10)
-        # num_correct = package.play_math("mix", num_questions)
+        # num_correct = package.play_science("mix", num_questions)
         # expected = num_questions
         # actual = num_correct
         # assert expected == actual
         pass
+    
+    def test_num_questions_science(self, capsys):
+        package.play_science(num_questions=11)
+        captured = capsys.readouterr()
+        assert "Maximum of 10 questions\n" == captured.out
+    
+    def test_difficulty_science(self, capsys):
+        package.play_science(difficulty="invalid")
+        captured = capsys.readouterr()
+        assert "Invalid Difficulty\n" == captured.out
+        
+    def test_sample_play_science(self, monkeypatch, capsys):
+        # test easy
+        monkeypatch.setattr("builtins.input", lambda _: "A")
+        package.play_science(num_questions=10, difficulty="easy")
+        captured = capsys.readouterr()
+        num_correct = captured.out.count("Correct!")
+        num_incorrect = captured.out.count("Incorrect!")
+        assert isinstance(num_correct, int)
+        assert isinstance(num_incorrect, int)
+        assert 0 <= num_correct <= 10
+        assert 0 <= num_incorrect <= 10
+        assert num_correct + num_incorrect == 10
+        
+        # test hard
+        monkeypatch.setattr("builtins.input", lambda _: "A")
+        package.play_science(num_questions=10, difficulty="hard")
+        captured = capsys.readouterr()
+        num_correct = captured.out.count("Correct!")
+        num_incorrect = captured.out.count("Incorrect!")
+        assert isinstance(num_correct, int)
+        assert isinstance(num_incorrect, int)
+        assert 0 <= num_correct <= 10
+        assert 0 <= num_incorrect <= 10
+        assert num_correct + num_incorrect == 10
+        
+        # test mix
+        monkeypatch.setattr("builtins.input", lambda _: "A")
+        package.play_science(num_questions=10, difficulty="mix")
+        captured = capsys.readouterr()
+        num_correct = captured.out.count("Correct!")
+        num_incorrect = captured.out.count("Incorrect!")
+        assert isinstance(num_correct, int)
+        assert isinstance(num_incorrect, int)
+        assert 0 <= num_correct <= 10
+        assert 0 <= num_incorrect <= 10
+        assert num_correct + num_incorrect == 10
+        
