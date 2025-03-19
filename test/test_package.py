@@ -148,4 +148,25 @@ class Tests:
 
 
     def test_play_science(self):
+        # WIP
+        # # test on easy mode with a random number of questions
+        # num_questions = random.randint(1, 10)
+        # num_correct = package.play_math("easy", num_questions)
+        # expected = num_questions
+        # actual = num_correct
+        # assert expected == actual
+        
+        # # test on hard mode with a random number of questions
+        # num_questions = random.randint(1, 10)
+        # num_correct = package.play_math("hard", num_questions)
+        # expected = num_questions
+        # actual = num_correct
+        # assert expected == actual
+        
+        # # test on mix mode with a random number of questions
+        # num_questions = random.randint(1, 10)
+        # num_correct = package.play_math("mix", num_questions)
+        # expected = num_questions
+        # actual = num_correct
+        # assert expected == actual
         pass
