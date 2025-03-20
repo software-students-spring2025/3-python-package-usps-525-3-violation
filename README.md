@@ -168,14 +168,42 @@ Your total score this game was 2/3: 66%
 ```
 
 ### play_science
-what does the code do
-exceptions thrown:
+This function starts a science quiz game. Users can choose number of questions, ranging from 1 to 10, and choose the difficulty of the questions to be easy, hard, or a mix of both. Users interact with the function via `input()`.
 
 | Argument    | Type | Description |
 |------------|------|-------------|
-| `arg1`  | `datatype`  | wordwords. |
-| `arg2` | `datatype`  | yadayada |
+| `num_questions`  | `Integer`  | Number of questions you will be given, has to be between 1 and 10. |
+| `difficulty` | `string`  | Difficulty of the questions, must be `easy`, `hard`, or `mix` for a mix of questions of both difficulties. |
 
 ```
-example input output
+>>> package.play_science(num_questions=10, difficulty='easy')
+
+What do you call the study of weather, climate and the atmosphere?
+A: Climatology
+B: Aerology
+C: Atmospheric Science
+D: Meteorology
+Please enter A, B, C, or D: a
+Incorrect! The correct answer was Meteorology.
+Press ENTER to continue
+
+Who is credited with coming up with the theory of evolution?
+A: Robert Oppenheimer
+B: Galileo Galilei
+C: Charles Darwin
+D: Gregor Mendel
+Please enter A, B, C, or D: a
+Incorrect! The correct answer was Charles Darwin.
+Press ENTER to continue
+
+What are the three layers of the Earth
+A: Outer shell, inner shell, and center
+B: Land, water, and atmosphere
+C: Rock layer, magma layer, and deep core
+D: Crust, mantle and core
+Please enter A, B, C, or D: d
+Correct!
+Press ENTER to continue
+
+You need to study more! Your score was 1/3.
 ```
