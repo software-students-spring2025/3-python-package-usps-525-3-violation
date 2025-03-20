@@ -59,8 +59,8 @@ def play_math(level, num_questions):
    return num_correct
 
 def play_geo(numOfQuestions=15, difficulty="easy"):
-    if difficulty not in ["easy", "medium"]:
-        print("Please choose either easy or medium in difficulty.")
+    if difficulty not in ["easy", "medium", "hard"]:
+        print("Please choose either easy, medium, or hard in difficulty.")
         return
 
     questions = {
@@ -98,6 +98,24 @@ def play_geo(numOfQuestions=15, difficulty="easy"):
             28: "Which African country has the most people?",
             29: "Which city in China has the largest population?",
             30: "Which island is the largest in the Mediterranean Sea?"
+        },
+
+        "hard": {
+            31: "Which country has the highest number of UNESCO World Heritage Sites?",
+            32: "Which city is home to the world's busiest airport by passenger traffic?",
+            33: "What is the name of the deepest trench in the world?",
+            34: "Which African country was never colonized by a European power?",
+            35: "Which U.S. state has the most national parks?",
+            36: "Which island country has the most active volcanoes?",
+            37: "What is the capital of Bhutan?",
+            38: "Which country has the highest average altitude?",
+            39: "Which river is known as the 'River of Five Colors'?",
+            40: "Which desert covers most of Mongolia?",
+            41: "What is the largest landlocked country in the world?",
+            42: "Which country has the oldest continuously used national flag?",
+            43: "Which country has the most time zones?",
+            44: "Which sea is known for being the saltiest natural lake in the world?",
+            45: "Which U.S. city has the highest population density?"
         }
     }
 
@@ -136,6 +154,24 @@ def play_geo(numOfQuestions=15, difficulty="easy"):
             28: "Nigeria",
             29: "Shanghai",
             30: "Sicily"
+        },
+
+        "hard": {
+            31: "Italy",
+            32: "Atlanta",
+            33: "Mariana Trench",
+            34: "Ethiopia",
+            35: "California",
+            36: "Indonesia",
+            37: "Thimphu",
+            38: "Bhutan",
+            39: "Cano Cristales",
+            40: "Gobi Desert",
+            41: "Kazakhstan",
+            42: "Denmark",
+            43: "France",
+            44: "Dead Sea",
+            45: "New York City"
         }
     }
 
@@ -150,16 +186,15 @@ def play_geo(numOfQuestions=15, difficulty="easy"):
         if ans == answers[difficulty][i]:
             print("Correct!")
             correct += 1
-
         else:
             print(f"Incorrect! The correct answer was {answers[difficulty][i]}.")
-            
+
         print()
         total += 1
 
     print(f"Your final score: {correct}/{total} ({int(correct * 100 / total)}%)")
     return correct
-
+  
 def play_vocab(level, mode, num_questions):
    wordbank = copy.deepcopy(original_wordbank)
    if level not in ['easy', 'medium', 'hard']:
