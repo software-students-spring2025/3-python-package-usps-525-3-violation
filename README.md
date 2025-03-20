@@ -1,4 +1,4 @@
-![Quizlearn CI/CD](https://github.com/software-students-spring2025/3-python-package-usps-525-3-violation/actions/workflows/build.yaml/badge.svg/?event=pull_request)
+![CI/CD](https://github.com/software-students-spring2025/3-python-package-usps-525-3-violation/actions/workflows/build.yaml/badge.svg/?event=pull_request)
 
 
 # Python Package Exercise
@@ -12,7 +12,8 @@
 
 This is an educational quiz game package. Choose between playing a math game, vocab game, geography game, or science game to test your skills and knowledge!
 
-## [PyPI Link](https://pypi.org/project/quizlearnpackage/)
+## PyPI Link
+[PyPI quizlearnpackage Link](https://pypi.org/project/quizlearnpackage/)
 
 ## Steps necessary to run program
 
