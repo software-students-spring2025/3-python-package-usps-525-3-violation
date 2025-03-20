@@ -1,4 +1,5 @@
-[![Packagepackage CI / CD](https://github.com/software-students-spring2025/3-python-package-usps-525-3-violation/actions/workflows/build.yaml/badge.svg)](https://github.com/software-students-spring2025/3-python-package-usps-525-3-violation/actions/workflows/build.yaml)
+![CI/CD](https://github.com/software-students-spring2025/3-python-package-usps-525-3-violation/actions/workflows/build.yaml/badge.svg?branch=main)
+
 
 # Python Package Exercise
 
