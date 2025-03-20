@@ -117,13 +117,50 @@ class Tests:
 
     def test_play_geo(self, monkeypatch, capsys):
         num_questions = 8
-        
-        questions_dict = package.play_geo.__globals__["questions"]["easy"]
-        answers_dict = package.play_geo.__globals__["answers"]["easy"]
     
-        selected_questions = random.sample(list(questions_dict.keys()), num_questions)
-        simulated_answers = iter([answers_dict[q].lower() for q in selected_questions])
-        
+        questions = {
+            "easy": {
+                1: "What is the capital of Germany?",
+                2: "Which continent is home to the Sahara Desert?",
+                3: "Which country has the largest population in the world?",
+                4: "Which U.S. state is known for having the Grand Canyon?",
+                5: "What is the name of the mountain range that separates Europe and Asia?",
+                6: "Which ocean borders the eastern coast of the United States?",
+                7: "What is the capital of Argentina?",
+                8: "Which country is known for the ancient ruins of Machu Picchu?",
+                9: "Which major river flows through the city of London?",
+                10: "What is the name of the coldest continent on Earth?",
+                11: "Which African country is famous for its pyramids?",
+                12: "What is the capital of Japan?",
+                13: "Which U.S. state is famous for its large potato production?",
+                14: "Which country is home to the Taj Mahal?",
+                15: "What is the name of the sea located between Europe and Africa?"
+            }
+        }
+    
+        answers = {
+            "easy": {
+                1: "Berlin",
+                2: "Africa",
+                3: "China",
+                4: "Arizona",
+                5: "Ural Mountains",
+                6: "Atlantic",
+                7: "Buenos Aires",
+                8: "Peru",
+                9: "Thames",
+                10: "Antarctica",
+                11: "Egypt",
+                12: "Tokyo",
+                13: "Idaho",
+                14: "India",
+                15: "Mediterranean Sea"
+            }
+        }
+    
+        selected_questions = random.sample(list(questions["easy"].keys()), num_questions)
+        simulated_answers = iter([answers["easy"][q] for q in selected_questions])
+    
         monkeypatch.setattr('builtins.input', lambda _: next(simulated_answers))
     
         correct_answers = package.play_geo(numOfQuestions=num_questions, difficulty="easy")
@@ -133,7 +170,7 @@ class Tests:
         assert question_count == num_questions, f"Expected {num_questions} questions, got {question_count}"
     
         match = re.search(r"Your final score: (\d+)/(\d+) \((\d+)%\)", captured.out)
-        assert match, "Could not find final score output"
+        assert match, "Could not identify final score output"
     
         correct_count = int(match.group(1))
         total_questions = int(match.group(2))
@@ -143,7 +180,7 @@ class Tests:
         assert correct_count == correct_answers, f"Expected {correct_answers} correct answers, got {correct_count}"
         assert percentage_score == int((correct_count / total_questions) * 100), f"Expected {int((correct_count / total_questions) * 100)}% score, got {percentage_score}%"
     
-        assert "Correct!" in captured.out or "Incorrect!" in captured.out, "Expected at least one 'Correct!' or 'Incorrect!' message"
+        assert "Correct!" in captured.out or "Incorrect!" in captured.out, "Expected at least one correct or incorrect message"
     
         package.play_geo(numOfQuestions=8, difficulty="invalid")
         captured = capsys.readouterr()
