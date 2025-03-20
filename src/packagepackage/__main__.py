@@ -37,7 +37,7 @@ def main():
                 break  
             except ValueError:
                 print("That's not a valid integer. Please try again.")
-        package.play_math(num_select[difficulty], num_qs)
+        package.play_math(num_select[int(difficulty)], int(num_qs))
         
     elif game_select == 2:
         print("Which difficulty would you like to play?")
