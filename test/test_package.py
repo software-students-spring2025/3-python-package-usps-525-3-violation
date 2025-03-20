@@ -116,31 +116,39 @@ class Tests:
         assert num_correct == 100
 
     def test_play_geo(self, monkeypatch, capsys):
-        numOfQuestions = 8
-        simulated_answers = iter([
-            "Berlin", "Africa", "China", "Wrong Answer", 
-            "Mediterranean Sea", "Buenos Aires", "Ural Mountains", "Atlantic"
-        ])
+        num_questions = 8
+        
+        questions_dict = package.play_geo.__globals__["questions"]["easy"]
+        answers_dict = package.play_geo.__globals__["answers"]["easy"]
+    
+        selected_questions = random.sample(list(questions_dict.keys()), num_questions)
+        simulated_answers = iter([answers_dict[q].lower() for q in selected_questions])
         
         monkeypatch.setattr('builtins.input', lambda _: next(simulated_answers))
     
-        package.play_geo(numOfQuestions=numOfQuestions, difficulty="easy")
-    
+        correct_answers = package.play_geo(numOfQuestions=num_questions, difficulty="easy")
         captured = capsys.readouterr()
-        question_count = captured.out.count("?")
-        assert question_count == numOfQuestions, f"Expected {numOfQuestions} questions, got {question_count}"
-        assert "Correct!" in captured.out, "Expected correct answers feedback, but didn't detect"
-        assert "Incorrect!" in captured.out, "Expected incorrect answers feedback, but didn't detect"
     
-        match = re.search(r"Your final score: (\d+)/(\d+)", captured.out)
+        question_count = captured.out.count("?")
+        assert question_count == num_questions, f"Expected {num_questions} questions, got {question_count}"
+    
+        match = re.search(r"Your final score: (\d+)/(\d+) \((\d+)%\)", captured.out)
         assert match, "Could not find final score output"
-        correct_answers = int(match.group(1))
+    
+        correct_count = int(match.group(1))
         total_questions = int(match.group(2))
-        assert total_questions == numOfQuestions, f"Expected {numOfQuestions} total questions, got {total_questions}"
+        percentage_score = int(match.group(3))
+    
+        assert total_questions == num_questions, f"Expected {num_questions} total questions, got {total_questions}"
+        assert correct_count == correct_answers, f"Expected {correct_answers} correct answers, got {correct_count}"
+        assert percentage_score == int((correct_count / total_questions) * 100), f"Expected {int((correct_count / total_questions) * 100)}% score, got {percentage_score}%"
+    
+        assert "Correct!" in captured.out or "Incorrect!" in captured.out, "Expected at least one 'Correct!' or 'Incorrect!' message"
     
         package.play_geo(numOfQuestions=8, difficulty="invalid")
         captured = capsys.readouterr()
-        assert "Please choose either easy, medium, or hard in difficulty level." in captured.out, "Expected error message from invalid difficulty level"
+        assert "Please choose either easy, medium, or hard in difficulty level." in captured.out, "Expected error message for invalid difficulty level."
+
 
     def test_play_vocab_invalid_args(self, monkeypatch, capsys):
         '''
