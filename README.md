@@ -95,16 +95,30 @@ PYTHONPATH=src pipenv run pytest --cov=packagepackage --cov-report=term-missing
 ## Function usages and examples:
 
 ### play_math
-what does the code do
-exceptions thrown:
+This function starts a math quiz game. Users can choose the number of questions, and the difficulty of the questions to be easy, medium, or hard. Users interact with the function via `input()`.
 
 | Argument    | Type | Description |
 |------------|------|-------------|
-| `arg1`  | `datatype`  | wordwords. |
-| `arg2` | `datatype`  | yadayada |
+| `level`  | `string`  | Must be either `'easy'`, `'medium'`, or `'hard'`. Indictes difficulty level of arithmetic problems. |
+| `num_ questions` | `int`  | Indicates how many questions will be asked |
 
 ```
-example input output
+>>> play_math('easy', 3)
+
+8 * 5 = 
+Input your answer: 40
+Correct!
+
+30 / 3 = 
+Input your answer: 10
+Correct!
+
+4 * 1 = 
+Input your answer: 4
+Correct!
+
+Well done! 3/3 Correct
+Elapsed time: 5.4 seconds
 ```
 
 ### play_geo
