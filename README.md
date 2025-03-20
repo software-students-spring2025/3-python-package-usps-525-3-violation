@@ -1,3 +1,5 @@
+![PackagePackage](https://github.com/software-students-spring2025/3-python-package-usps-525-3-violation/actions/workflows/build.yaml/badge.svg)
+
 # Python Package Exercise
 
 An exercise to create a Python package, build it, test it, distribute it, and use it. See [instructions](./instructions.md) for details.
@@ -7,9 +9,6 @@ An exercise to create a Python package, build it, test it, distribute it, and us
 - [Anna Ye](https://github.com/AnnaTheYe)
 - [Jack Wang](https://github.com/JackInTheBox314)
 - [Joylyn Gong](https://github.com/joylyngong)
-
-## Badge
-![Python build & test](https://github.com/software-students-spring2025/3-python-package-usps-525-3-violation/actions/workflows/build.yaml/badge.svg)
 
 ## Description
 
