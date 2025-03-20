@@ -8,6 +8,8 @@ requests = "*"
 coverage = "*"
 pytest-cov = "*"
 pytest = "*"
+build = "*"
+twine = "*"
 
 [dev-packages]
 
