@@ -116,13 +116,13 @@ twine upload dist/*
 
 ## Function usages and examples:
 
-### play_math
+### play_math(level, num_questions)
 This function starts a math quiz game. Users can choose the number of questions, and the difficulty of the questions to be easy, medium, or hard. Users interact with the function via `input()`.
 
 | Argument    | Type | Description |
 |------------|------|-------------|
 | `level`  | `string`  | Must be either `'easy'`, `'medium'`, or `'hard'`. Indicates difficulty level of arithmetic problems. |
-| `num_ questions` | `int`  | Indicates how many questions will be asked |
+| `num_questions` | `int`  | Indicates how many questions will be asked |
 
 ```
 >>> play_math('easy', 3)
@@ -241,7 +241,7 @@ Correct!
 Your total score this game was 2/3: 66%
 ```
 
-### play_science
+### play_science(num_questions, difficulty)
 This function starts a science quiz game. Users can choose number of questions, ranging from 1 to 10, and choose the difficulty of the questions to be easy, hard, or a mix of both. Users interact with the function via `input()`.
 
 | Argument    | Type | Description |
