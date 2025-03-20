@@ -5,6 +5,9 @@ name = "pypi"
 
 [packages]
 requests = "*"
+coverage = "*"
+pytest-cov = "*"
+pytest = "*"
 
 [dev-packages]
 

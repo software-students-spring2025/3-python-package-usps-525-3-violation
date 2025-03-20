@@ -119,7 +119,7 @@ class Tests:
         pass
 
 
-    def test_play_vocab_invalid_args(self):
+    def test_play_vocab_invalid_args(self, monkeypatch, capsys):
         '''
         Test invalid inputs
         '''
@@ -160,6 +160,15 @@ class Tests:
         # test non numbers
         with pytest.raises(ValueError, match="Invalid number"):
             package.play_vocab("easy", "synonyms", "eleven")
+
+        # test invalid answers
+        inputs = iter(["acsjcoiaj", "A", "B"])  # mock user choices
+        monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+
+        package.play_vocab("easy", "synonyms", 2)  # start vocab quiz with sample parameters
+
+        captured = capsys.readouterr()
+        assert "Invalid option" in captured.out, f"Expected invalid option detection, did not detect"
 
 
 

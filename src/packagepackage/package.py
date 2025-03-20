@@ -58,11 +58,143 @@ def play_math(level, num_questions):
    print(f"Elapsed time: {elapsed_time:.1f} seconds")
    return num_correct
 
+def play_geo(numOfQuestions=15, difficulty="easy"):
+    if difficulty not in ["easy", "medium", "hard"]:
+        print("Please choose either easy, medium, or hard in difficulty.")
+        return
 
-def play_geo():
-   pass
+    questions = {
+        "easy": {
+            1: "What is the capital of Germany?",
+            2: "Which continent is home to the Sahara Desert?",
+            3: "Which country has the largest population in the world?",
+            4: "Which U.S. state is known for having the Grand Canyon?",
+            5: "What is the name of the mountain range that separates Europe and Asia?",
+            6: "Which ocean borders the eastern coast of the United States?",
+            7: "What is the capital of Argentina?",
+            8: "Which country is known for the ancient ruins of Machu Picchu?",
+            9: "Which major river flows through the city of London?",
+            10: "What is the name of the coldest continent on Earth?",
+            11: "Which African country is famous for its pyramids?",
+            12: "What is the capital of Japan?",
+            13: "Which U.S. state is famous for its large potato production?",
+            14: "Which country is home to the Taj Mahal?",
+            15: "What is the name of the sea located between Europe and Africa?"
+        },
 
+        "medium": {
+            16: "What country has the longest coastline in the world?",
+            17: "Which river is the longest in Africa?",
+            18: "Which U.S. state shares the longest border with Canada?",
+            19: "What is the largest island in the world?",
+            20: "Which desert is the largest hot desert in the world?",
+            21: "Which country is home to the most lakes?",
+            22: "Which city is known as the 'City of Canals'?",
+            23: "What is the longest river in the United States?",
+            24: "Which ocean is the smallest by surface area?",
+            25: "Which sea separates the Arabian Peninsula from Africa?",
+            26: "Which U.S. state has the highest peak?",
+            27: "Which country has the highest population density?",
+            28: "Which African country has the most people?",
+            29: "Which city in China has the largest population?",
+            30: "Which island is the largest in the Mediterranean Sea?"
+        },
 
+        "hard": {
+            31: "Which country has the highest number of UNESCO World Heritage Sites?",
+            32: "Which city is home to the world's busiest airport by passenger traffic?",
+            33: "What is the name of the deepest trench in the world?",
+            34: "Which African country was never colonized by a European power?",
+            35: "Which U.S. state has the most national parks?",
+            36: "Which island country has the most active volcanoes?",
+            37: "What is the capital of Bhutan?",
+            38: "Which country has the highest average altitude?",
+            39: "Which river is known as the 'River of Five Colors'?",
+            40: "Which desert covers most of Mongolia?",
+            41: "What is the largest landlocked country in the world?",
+            42: "Which country has the oldest continuously used national flag?",
+            43: "Which country has the most time zones?",
+            44: "Which sea is known for being the saltiest natural lake in the world?",
+            45: "Which U.S. city has the highest population density?"
+        }
+    }
+
+    answers = {
+        "easy": {
+            1: "Berlin",
+            2: "Africa",
+            3: "China",
+            4: "Arizona",
+            5: "Ural Mountains",
+            6: "Atlantic",
+            7: "Buenos Aires",
+            8: "Peru",
+            9: "Thames",
+            10: "Antarctica",
+            11: "Egypt",
+            12: "Tokyo",
+            13: "Idaho",
+            14: "India",
+            15: "Mediterranean Sea"
+        },
+
+        "medium": {
+            16: "Canada",
+            17: "Nile River",
+            18: "Alaska",
+            19: "Greenland",
+            20: "Sahara Desert",
+            21: "Canada",
+            22: "Venice",
+            23: "Missouri",
+            24: "Arctic Ocean",
+            25: "Red Sea",
+            26: "Denali",
+            27: "Monaco",
+            28: "Nigeria",
+            29: "Shanghai",
+            30: "Sicily"
+        },
+
+        "hard": {
+            31: "Italy",
+            32: "Atlanta",
+            33: "Mariana Trench",
+            34: "Ethiopia",
+            35: "California",
+            36: "Indonesia",
+            37: "Thimphu",
+            38: "Bhutan",
+            39: "Cano Cristales",
+            40: "Gobi Desert",
+            41: "Kazakhstan",
+            42: "Denmark",
+            43: "France",
+            44: "Dead Sea",
+            45: "New York City"
+        }
+    }
+
+    selectedAnswers = random.sample(list(questions[difficulty].keys()), numOfQuestions)
+    correct = 0
+    total = 0
+
+    for i in selectedAnswers:
+        print(questions[difficulty][i])
+        ans = input("Your answer: ").strip().title()
+
+        if ans == answers[difficulty][i]:
+            print("Correct!")
+            correct += 1
+        else:
+            print(f"Incorrect! The correct answer was {answers[difficulty][i]}.")
+
+        print()
+        total += 1
+
+    print(f"Your final score: {correct}/{total} ({int(correct * 100 / total)}%)")
+    return correct
+  
 def play_vocab(level, mode, num_questions):
    wordbank = copy.deepcopy(original_wordbank)
    if level not in ['easy', 'medium', 'hard']:
@@ -112,6 +244,7 @@ def play_vocab(level, mode, num_questions):
       print(f"D: {options[3]}")
       ans = input("Choose A, B, C, or D: ").upper()
       while ans not in key:
+         print("Invalid option.")
          ans = input("Invalid option. Choose A, B, C, or D: ").upper()
 
 
