@@ -116,7 +116,7 @@ class Tests:
         assert num_correct == 100
 
     def test_play_geo(self, monkeypatch, capsys):
-        num_questions = 8
+        numOfQuestions = 8
         simulated_answers = iter([
             "Berlin", "Africa", "China", "Wrong Answer", 
             "Mediterranean Sea", "Buenos Aires", "Ural Mountains", "Atlantic"
@@ -124,11 +124,11 @@ class Tests:
         
         monkeypatch.setattr('builtins.input', lambda _: next(simulated_answers))
     
-        package.play_geo(num_questions=num_questions, difficulty="easy")
+        package.play_geo(numOfQuestions=numOfQuestions, difficulty="easy")
     
         captured = capsys.readouterr()
         question_count = captured.out.count("?")
-        assert question_count == num_questions, f"Expected {num_questions} questions, got {question_count}"
+        assert question_count == numOfQuestions, f"Expected {numOfQuestions} questions, got {question_count}"
         assert "Correct!" in captured.out, "Expected correct answers feedback, but didn't detect"
         assert "Incorrect!" in captured.out, "Expected incorrect answers feedback, but didn't detect"
     
@@ -136,9 +136,9 @@ class Tests:
         assert match, "Could not find final score output"
         correct_answers = int(match.group(1))
         total_questions = int(match.group(2))
-        assert total_questions == num_questions, f"Expected {num_questions} total questions, got {total_questions}"
+        assert total_questions == numOfQuestions, f"Expected {numOfQuestions} total questions, got {total_questions}"
     
-        package.play_geo(num_questions=8, difficulty="invalid")
+        package.play_geo(numOfQuestions=8, difficulty="invalid")
         captured = capsys.readouterr()
         assert "Please choose either easy, medium, or hard in difficulty level." in captured.out, "Expected error message from invalid difficulty level"
 
