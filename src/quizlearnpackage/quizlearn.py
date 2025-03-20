@@ -330,6 +330,9 @@ def play_science(num_questions=10, difficulty="mix"):
    if num_questions > 10:
       print("Maximum of 10 questions")
       return
+   elif num_questions < 1:
+      print("Minimum of 1 question")
+      return
    
    questions = {
       'easy': {
