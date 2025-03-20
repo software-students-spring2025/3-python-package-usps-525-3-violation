@@ -99,7 +99,7 @@ This function starts a math quiz game. Users can choose the number of questions,
 
 | Argument    | Type | Description |
 |------------|------|-------------|
-| `level`  | `string`  | Must be either `'easy'`, `'medium'`, or `'hard'`. Indictes difficulty level of arithmetic problems. |
+| `level`  | `string`  | Must be either `'easy'`, `'medium'`, or `'hard'`. Indicates difficulty level of arithmetic problems. |
 | `num_ questions` | `int`  | Indicates how many questions will be asked |
 
 ```
@@ -121,17 +121,55 @@ Well done! 3/3 Correct
 Elapsed time: 5.4 seconds
 ```
 
-### play_geo
-what does the code do
-exceptions thrown:
+### play_geo(numOfQuestions, difficulty)
+This function will prompt users to begin a geography quiz game that will challenge their knowledge on a diverse set of world geography questions. At each difficulty level of easy, medium, and hard, there will be 15 questions to be answered. The questions will range from topics about countries, states, rivers, to capitals. Once the user is finished with answering a question, they will be informed on whether the answer they provided was correct or not. At the end, they will be given a final score of how many questions they were able to answer correctly 
 
 | Argument    | Type | Description |
 |------------|------|-------------|
-| `arg1`  | `datatype`  | wordwords. |
-| `arg2` | `datatype`  | yadayada |
+| `difficulty`  | `string`  | Revolves around three levels of difficulty from `'easy'`, `'medium'`, to `'hard'`. |
+| `numOfQuestions` | `int`  | Number of questions prompted for users to answer at each difficulty level. |
+
+Exceptions Raised:
+- `ValueError("Invalid number of questions")`: `numOfQuestions` less than 1 or greater than 15 questions
+- `ValueError("Invalid difficulty")`: `level` outside of `['easy', 'medium', 'hard']`
+- `TypeError("Invalid type for numOfQuestions")`: `numOfQuestions` is not an integer value (e.g. in cases where the user is passing a float value or string when only an integer is suitable)
 
 ```
-example input output
+>>> play_geo(numOfQuestions=8, difficulty='easy')
+
+What is the capital of Germany?
+Your answer: Berlin
+Correct!
+
+Which continent is home to the Sahara Desert?
+Your answer: Africa
+Correct!
+
+Which country has the largest population in the world?
+Your answer: China
+Correct!
+
+Which U.S. state is known for having the Grand Canyon?
+Your answer: Nevada
+Incorrect! The correct answer was Arizona.
+
+What is the name of the mountain range that separates Europe and Asia?
+Your answer: Ural Mountains
+Correct!
+
+Which ocean borders the eastern coast of the United States?
+Your answer: Pacific
+Incorrect! The correct answer was Atlantic.
+
+What is the capital of Argentina?
+Your answer: Buenos Aires
+Correct!
+
+Which country is known for the ancient ruins of Machu Picchu?
+Your answer: Bolivia
+Incorrect! The correct answer was Peru.
+
+Your final score: 6/8 (75%)
 ```
 
 ### play_vocab(level, mode, num_questions)
