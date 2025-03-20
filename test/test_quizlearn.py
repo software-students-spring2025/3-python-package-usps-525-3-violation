@@ -1,5 +1,5 @@
 import pytest
-from packagepackage import package
+from quizlearnpackage import quizlearn
 import random
 import re
 
@@ -46,7 +46,7 @@ class Tests:
         simulated_inputs = iter(["3", "1", "30", "8"])
         monkeypatch.setattr('builtins.input', lambda answer: next(simulated_inputs))
 
-        num_correct = package.play_math("easy", 4)
+        num_correct = quizlearn.play_math("easy", 4)
         assert num_correct == 4
 
     def gen_questions(self, max):
@@ -71,7 +71,7 @@ class Tests:
         """
         simulated_inputs = []
         for i in range(100):
-            ans = package.math_ans(fixed_numbers[3*i+2], fixed_numbers[3*i], fixed_numbers[3*i+1])
+            ans = quizlearn.math_ans(fixed_numbers[3*i+2], fixed_numbers[3*i], fixed_numbers[3*i+1])
             simulated_inputs.append(ans)
         return simulated_inputs
     
@@ -86,7 +86,7 @@ class Tests:
         simulated_inputs = iter(simulated_inputs)
         monkeypatch.setattr(random, 'randint', lambda x, y: next(fixed_numbers))
         monkeypatch.setattr('builtins.input', lambda answer: next(simulated_inputs))
-        num_correct = package.play_math("easy", 100)
+        num_correct = quizlearn.play_math("easy", 100)
 
         assert num_correct == 100
         monkeypatch.undo()
@@ -98,7 +98,7 @@ class Tests:
         simulated_inputs = iter(simulated_inputs)
         monkeypatch.setattr(random, 'randint', lambda x, y: next(fixed_numbers))
         monkeypatch.setattr('builtins.input', lambda answer: next(simulated_inputs))
-        num_correct = package.play_math("medium", 100)
+        num_correct = quizlearn.play_math("medium", 100)
 
         assert num_correct == 100
         monkeypatch.undo()
@@ -110,7 +110,7 @@ class Tests:
         simulated_inputs = iter(simulated_inputs)
         monkeypatch.setattr(random, 'randint', lambda x, y: next(fixed_numbers))
         monkeypatch.setattr('builtins.input', lambda answer: next(simulated_inputs))
-        num_correct = package.play_math("hard", 100)
+        num_correct = quizlearn.play_math("hard", 100)
 
         assert num_correct == 100
 
@@ -125,46 +125,46 @@ class Tests:
         # test invalid level
         # test non strings
         with pytest.raises(ValueError, match="Invalid difficulty"):
-            package.play_vocab(1405, "synonyms", 5)
+            quizlearn.play_vocab(1405, "synonyms", 5)
 
         # test invalid strings
         with pytest.raises(ValueError, match="Invalid difficulty"):
-            package.play_vocab("asoadon", "synonyms", 5)
+            quizlearn.play_vocab("asoadon", "synonyms", 5)
 
         # test invalid gamemode
         # test non strings
         with pytest.raises(ValueError, match="Invalid gamemode"):
-            package.play_vocab("easy", 67.2, 5)
+            quizlearn.play_vocab("easy", 67.2, 5)
 
         # test invalid strings
         with pytest.raises(ValueError, match="Invalid gamemode"):
-            package.play_vocab("easy", "firefighter", 5)
+            quizlearn.play_vocab("easy", "firefighter", 5)
 
         # test invalid numbers
         
         # test out of range numbers
         with pytest.raises(ValueError, match="Invalid number"):
-            package.play_vocab("easy", "synonyms", 25)
+            quizlearn.play_vocab("easy", "synonyms", 25)
 
         with pytest.raises(ValueError, match="Invalid number"):
-            package.play_vocab("easy", "synonyms", 0)
+            quizlearn.play_vocab("easy", "synonyms", 0)
         
         with pytest.raises(ValueError, match="Invalid number"):
-            package.play_vocab("easy", "synonyms", -1)
+            quizlearn.play_vocab("easy", "synonyms", -1)
 
         # test non integers
         with pytest.raises(ValueError, match="Invalid number"):
-            package.play_vocab("easy", "synonyms", 4.5)
+            quizlearn.play_vocab("easy", "synonyms", 4.5)
 
         # test non numbers
         with pytest.raises(ValueError, match="Invalid number"):
-            package.play_vocab("easy", "synonyms", "eleven")
+            quizlearn.play_vocab("easy", "synonyms", "eleven")
 
         # test invalid answers
         inputs = iter(["acsjcoiaj", "A", "B"])  # mock user choices
         monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
-        package.play_vocab("easy", "synonyms", 2)  # start vocab quiz with sample parameters
+        quizlearn.play_vocab("easy", "synonyms", 2)  # start vocab quiz with sample parameters
 
         captured = capsys.readouterr()
         assert "Invalid option" in captured.out, f"Expected invalid option detection, did not detect"
@@ -253,7 +253,7 @@ class Tests:
             inputs = iter(["A"] * 10)
             monkeypatch.setattr("builtins.input", lambda _: next(inputs))
             
-            package.play_vocab(level, "synonyms", 10)  # start vocab quiz with sample parameters
+            quizlearn.play_vocab(level, "synonyms", 10)  # start vocab quiz with sample parameters
             captured = capsys.readouterr()
             output_words = re.findall(r"Which word is a synonym for (\w+)\?", captured.out)
 
@@ -289,7 +289,7 @@ class Tests:
         inputs = iter(["A", "B"] * 4)  # mock user choices
         monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
-        package.play_vocab("easy", "synonyms", 8)  # start vocab quiz with sample parameters
+        quizlearn.play_vocab("easy", "synonyms", 8)  # start vocab quiz with sample parameters
 
         captured = capsys.readouterr()
 
@@ -300,7 +300,7 @@ class Tests:
         inputs = iter(["A", "B"])  # Mock user choices
         monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
-        package.play_vocab("easy", "antonyms", 2)  # start vocab quiz with sample parameters
+        quizlearn.play_vocab("easy", "antonyms", 2)  # start vocab quiz with sample parameters
 
         captured = capsys.readouterr()
 
@@ -311,7 +311,7 @@ class Tests:
         inputs = iter(["A", "B"])  # Mock user choices
         monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
-        package.play_vocab("easy", "both", 2)  # start vocab quiz with sample parameters
+        quizlearn.play_vocab("easy", "both", 2)  # start vocab quiz with sample parameters
 
         captured = capsys.readouterr()
 
@@ -327,7 +327,7 @@ class Tests:
         inputs = iter(["A"] * num_questions)
         monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
-        package.play_vocab("easy", "synonyms", num_questions)  # start vocab quiz with sample parameters
+        quizlearn.play_vocab("easy", "synonyms", num_questions)  # start vocab quiz with sample parameters
 
         captured = capsys.readouterr() 
 
@@ -353,7 +353,7 @@ class Tests:
         inputs = iter(["A"] * num_questions)
         monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
-        package.play_vocab("easy", "synonyms", num_questions)  # start vocab quiz with sample parameters
+        quizlearn.play_vocab("easy", "synonyms", num_questions)  # start vocab quiz with sample parameters
 
         captured = capsys.readouterr()
         point_count = captured.out.count("Correct!")
@@ -373,19 +373,19 @@ class Tests:
         assert int(score_earned/num_questions * 100) == int(match.group(1)), f"Expected calculated score of {int(score_earned * 100/num_questions)}%, received {int(match.group(1))}%"
     
     def test_num_questions_science(self, capsys):
-        package.play_science(num_questions=11)
+        quizlearn.play_science(num_questions=11)
         captured = capsys.readouterr()
         assert "Maximum of 10 questions\n" == captured.out
     
     def test_difficulty_science(self, capsys):
-        package.play_science(difficulty="invalid")
+        quizlearn.play_science(difficulty="invalid")
         captured = capsys.readouterr()
         assert "Invalid Difficulty\n" == captured.out
         
     def test_sample_play_science(self, monkeypatch, capsys):
         # test easy
         monkeypatch.setattr("builtins.input", lambda _: "A")
-        package.play_science(num_questions=10, difficulty="easy")
+        quizlearn.play_science(num_questions=10, difficulty="easy")
         captured = capsys.readouterr()
         num_correct = captured.out.count("Correct!")
         num_incorrect = captured.out.count("Incorrect!")
@@ -397,7 +397,7 @@ class Tests:
         
         # test hard
         monkeypatch.setattr("builtins.input", lambda _: "A")
-        package.play_science(num_questions=10, difficulty="hard")
+        quizlearn.play_science(num_questions=10, difficulty="hard")
         captured = capsys.readouterr()
         num_correct = captured.out.count("Correct!")
         num_incorrect = captured.out.count("Incorrect!")
@@ -409,7 +409,7 @@ class Tests:
         
         # test mix
         monkeypatch.setattr("builtins.input", lambda _: "A")
-        package.play_science(num_questions=10, difficulty="mix")
+        quizlearn.play_science(num_questions=10, difficulty="mix")
         captured = capsys.readouterr()
         num_correct = captured.out.count("Correct!")
         num_incorrect = captured.out.count("Incorrect!")
