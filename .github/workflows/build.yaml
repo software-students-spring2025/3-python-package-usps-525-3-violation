@@ -21,3 +21,15 @@ jobs:
           pipenv install pytest
           pipenv --venv
           pipenv run python -m pytest
+  deliver:
+    needs: [build]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Python, pipenv and Pipfile packages
+        uses: kojoru/prepare-pipenv@v1
+      - name: Build package
+        run: |
+          pipenv install build
+          pipenv run python -m build .
