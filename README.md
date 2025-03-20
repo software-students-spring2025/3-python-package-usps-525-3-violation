@@ -2,9 +2,6 @@
 
 
 # Python Package Exercise
-
-An exercise to create a Python package, build it, test it, distribute it, and use it. See [instructions](./instructions.md) for details.
-
 ## Team members
 - [Tim Xu](https://github.com/timxu23)
 - [Anna Ye](https://github.com/AnnaTheYe)
@@ -13,14 +10,37 @@ An exercise to create a Python package, build it, test it, distribute it, and us
 
 ## Description
 
-This is an educational quiz game package. Users can choose between playing a math game, vocab game, geography game, or science game to test their skills and knowledge.
+This is an educational quiz game package. Choose between playing a math game, vocab game, geography game, or science game to test your skills and knowledge!
 
-## PyPI Link
+## [PyPI Link](https://pypi.org/project/quizlearnpackage/)
 
 ## Steps necessary to run program
 
-### Importing into your project
-# TODO
+### Package installation steps
+1. Create `pipenv` virtual environment:
+
+```
+pip install pipenv
+```
+2. Activate virtual environment:
+
+```
+pipenv shell
+```
+3. Install package:
+```
+pipenv install quizlearnpackage
+```
+4. Import package into Python
+```
+from quizlearnpackage import quizlearn
+```
+5. Choose quiz type and enjoy!
+
+```
+# sample usage
+quizlearn.play_vocab('hard', 'both', 12)
+```
 
 ### Running example usages
 
@@ -35,10 +55,10 @@ git clone https://github.com/software-students-spring2025/3-python-package-usps-
 cd 3-python-package-usps-525-3-violation
 ```
 
-3. Create `pipenv` virtual environment and install package:
+3. Create `pipenv` virtual environment:
 
 ```
-something to do with PyPI will go here, refer to example
+pip install pipenv
 ```
 4. Activate virtual environment:
 
@@ -54,7 +74,7 @@ PYTHONPATH=src python3 -m quizlearnpackage
 
 6. Follow instructions and enjoy!
 
-### Running Pytest
+### How to contribute to quizlearnpackage
 
 1. First, clone the respository:
 
@@ -67,10 +87,10 @@ git clone https://github.com/software-students-spring2025/3-python-package-usps-
 cd 3-python-package-usps-525-3-violation
 ```
 
-3. Create `pipenv` virtual environment and install package:
+3. Create `pipenv` virtual environment:
 
 ```
-something to do with PyPI will go here, refer to example
+pip install pipenv
 ```
 4. Activate virtual environment:
 
@@ -78,19 +98,20 @@ something to do with PyPI will go here, refer to example
 pipenv shell
 ```
 
-5. Run pytest with coverage reports:
+5. After making contributions, verify that they pass tests:
 
 ```
 PYTHONPATH=src pipenv run pytest --cov=quizlearnpackage --cov-report=term-missing
 ```
 
+6. Upload to PyPI
+Remove any `dist` or `src/*.egg-info`, and increment version in `pyproject.toml`. Then,
 
-- how a developer who wants to import your project into their own code can do so - include documentation and code examples for all functions in your package and a link to an example Python program that uses each of them.
-- how a developer who wants to contribute to your project can set up the virtual environment, install dependencies, and build and test your package for themselves.
-- the names of all teammates as links to their GitHub profiles in the `README.md` file.
-- instructions for how to configure and run all parts of your project for any developer on any platform - these instructions must work!
-- instructions for how to set up any environment variables and import any starter data into the database, as necessary, for the system to operate correctly when run.
-- if there are any "secret" configuration files, such as `.env` or similar files, that are not included in the version control repository, examples of these files, such as `env.example`, with dummy data must be included in the repository and exact instructions for how to create the proper configuration files and what their contents should be must be supplied to the course admins by the due date.
+```
+pip install build twine
+python -m build
+twine upload dist/*
+```
 
 ## Function usages and examples:
 
@@ -224,7 +245,7 @@ This function starts a science quiz game. Users can choose number of questions, 
 
 | Argument    | Type | Description |
 |------------|------|-------------|
-| `num_questions`  | `Integer`  | Number of questions you will be given, has to be between 1 and 10. |
+| `num_questions`  | `int`  | Number of questions you will be given, has to be between 1 and 10. |
 | `difficulty` | `string`  | Difficulty of the questions, must be `easy`, `hard`, or `mix` for a mix of questions of both difficulties. |
 
 ```
