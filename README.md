@@ -120,17 +120,51 @@ exceptions thrown:
 example input output
 ```
 
-### play_vocab
-what does the code do
-exceptions thrown:
+### play_vocab(level, mode, num_questions)
+This function starts a vocab quiz game with words imported from `src/packagepackage/wordbank.py`. Users can choose between three difficulties -- easy, medium, and hard -- and between three gamemodes -- synonyms only, antonyms only, or both. Users can also choose a number of questions to be asked between 1 through 15. There are 20 synonym/antonym tuples for each difficulty, and for each question, users can choose between 4 multiple choice answers. At the end, the score is printed. Users interact with the function via `input()`. Questions are capped at 15 to prevent the same words from appearing too many times in one game session.
+
+Exceptions raised:
+- `ValueError("Invalid difficulty")`: `level` outside of `['easy', 'medium', 'hard']`
+- `ValueError("Invalid gamemode")`: `mode` outside of `['synonyms', 'antonyms', 'both']`
+- `ValueError("Invalid number of questions)`: `num_questions` less than 1 or greater than 15
 
 | Argument    | Type | Description |
 |------------|------|-------------|
-| `arg1`  | `datatype`  | wordwords. |
-| `arg2` | `datatype`  | yadayada |
+| `level`  | `string`  | Must be either `'easy'`, `'medium'`, or `'hard'`. Indictes which difficulty level of the wordbank questions will be drawn from. |
+| `mode` | `string`  | Must be either `'synonyms'`, `'antonyms'`, or `'both'`. Indicates which types of questions will be asked.|
+| `num_questions` | `int`  | Must be between `1` and `15`. Indicates how many questions will be asked.|
 
 ```
-example input output
+>>> play_vocab('hard', 'both', 3)
+
+Which word is an antonym for Exultant?
+A: Melancholic
+B: Perspicacious
+C: Indolent
+D: Intrepid
+Choose A, B, C, or D: 
+>>> a
+Correct!
+
+Which word is an antonym for Diligent?
+A: Pusillanimous
+B: Frugal
+C: Indolent
+D: Thrifty
+Choose A, B, C, or D: 
+>>> d
+Incorrect. The correct answer was Indolent
+
+Which word is a synonym for Ephemeral?
+A: Dauntless
+B: Imperious
+C: Transient
+D: Ostentatious
+Choose A, B, C, or D: 
+>>> c
+Correct!
+
+Your total score this game was 2/3: 66%
 ```
 
 ### play_science
