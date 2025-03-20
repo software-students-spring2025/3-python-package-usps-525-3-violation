@@ -397,6 +397,7 @@ def play_science(num_questions=10, difficulty="mix"):
          correct += 1
       else:
          print(f"Incorrect! The correct answer was {selected_answers[i]}.")
+      input("Press ENTER to continue")
       print()
       total += 1
       
