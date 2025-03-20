@@ -138,9 +138,9 @@ exceptions thrown:
 
 | Argument    | Type | Description |
 |------------|------|-------------|
-| `arg1`  | `datatype`  | wordwords. |
-| `arg2` | `datatype`  | yadayada |
+| `num_questions`  | `Integer`  | Number of questions |
+| `difficulty` | `string`  | Difficulty of the questions |
 
 ```
-example input output
+package.play_science(num_questions=10, difficulty='easy')
 ```
