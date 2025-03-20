@@ -63,7 +63,7 @@ def main():
       
     elif game_select == 3:
         pass
-    elif game_select == '4':
+    elif game_select == 4:
         print("Would you like to play with easy questions, hard questions, or a mix of both?")
         print("Enter 1 for easy, 2 for hard, and 3 for both")
         difficulty = int(input("Input a number: "))
