@@ -1,6 +1,5 @@
 import random
 import time
-from packagepackage.wordbank import wordbank as original_wordbank
     
 def math_ans(op, num1, num2):
    if op == 1:

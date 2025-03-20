@@ -2,7 +2,6 @@ import pytest
 from packagepackage import package
 import random
 import re
-from packagepackage.wordbank import wordbank
 
 
 class Tests:
