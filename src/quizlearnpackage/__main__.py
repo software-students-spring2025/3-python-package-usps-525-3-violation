@@ -62,7 +62,26 @@ def main():
         quizlearn.play_vocab(level_select[level], mode_select[mode], int(num_questions))
       
     elif game_select == 3:
-        pass
+        print("Would you like to play with easy, medium, or hard questions?")
+        print("Enter 1 for easy, 2 for medium, and 3 for hard")
+        difficulty = int(input("Input a number: "))
+        while difficulty not in [1, 2, 3]:
+            difficulty = input("Invalid input, please select an integer from 1 through 3: ")
+        num_select = {1:"easy", 2:"medium", 3:"hard"}
+        print("Now choose how many questions you would like (between 1 and 10): ")
+        while True:
+            num_qs = int(input("Input a number: "))
+            try:
+                if not 1 <= num_qs <= 15:
+                    print("Number must be between 1 and 15. Please try again.")
+                    continue
+                num = int(num_qs)
+                print("You entered: ", num)
+                break  
+            except ValueError:
+                print("That's not a valid integer. Please try again.")
+        print()
+        quizlearn.play_geo(num_questions=num_qs, difficulty=num_select[difficulty])
     elif game_select == 4:
         print("Would you like to play with easy questions, hard questions, or a mix of both?")
         print("Enter 1 for easy, 2 for hard, and 3 for both")
