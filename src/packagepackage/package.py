@@ -58,7 +58,7 @@ def play_math(level, num_questions):
 
 def play_geo(numOfQuestions=15, difficulty="easy"):
     if difficulty not in ["easy", "medium", "hard"]:
-        print("Please choose either easy, medium, or hard in difficulty.")
+        print("Please choose either easy, medium, or hard in difficulty level.")
         return
 
     questions = {

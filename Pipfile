@@ -8,6 +8,7 @@ requests = "*"
 coverage = "*"
 pytest-cov = "*"
 pytest = "*"
+exceptiongroup = "*"
 
 [dev-packages]
 
