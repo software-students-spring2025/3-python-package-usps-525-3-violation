@@ -2,7 +2,6 @@ import pytest
 from packagepackage import package
 import random
 import re
-from packagepackage.wordbank import wordbank
 
 
 class Tests:
@@ -177,6 +176,75 @@ class Tests:
         Test that question words and answer options come from wordbank
         Test that words come from correct level
         '''
+        wordbank = {
+   "easy": [
+      ("Love", "Like", "Hate"),
+      ("Happy", "Joyful", "Sad"),
+      ("Fast", "Quick", "Slow"),
+      ("Big", "Large", "Small"),
+      ("Easy", "Simple", "Difficult"),
+      ("Loud", "Noisy", "Quiet"),
+      ("Hot", "Warm", "Cold"),
+      ("Dark", "Dim", "Bright"),
+      ("Strong", "Powerful", "Weak"),
+      ("Clean", "Tidy", "Messy"),
+      ("Friendly", "Kind", "Mean"),
+      ("Soft", "Gentle", "Rough"),
+      ("Smart", "Clever", "Dumb"),
+      ("Fun", "Enjoyable", "Boring"),
+      ("Shout", "Yell", "Whisper"),
+      ("Wet", "Damp", "Dry"),
+      ("Brave", "Courageous", "Fearful"),
+      ("Thin", "Slim", "Thick"),
+      ("New", "Fresh", "Old"),
+      ("Safe", "Secure", "Dangerous")
+   ],
+   "medium": [
+      ("Muted", "Faint", "Blaring"),
+      ("Sturdy", "Robust", "Frail"),
+      ("Vivid", "Radiant", "Subdued"),
+      ("Lazy", "Idle", "Energetic"),
+      ("Sharp", "Pointed", "Dull"),
+      ("Brisk", "Lively", "Sluggish"),
+      ("Famous", "Renowned", "Obscure"),
+      ("Shy", "Timid", "Bold"),
+      ("Smooth", "Even", "Bumpy"),
+      ("Lucky", "Fortunate", "Hapless"),
+      ("Heavy", "Weighty", "Light"),
+      ("Precise", "Exact", "Vague"),
+      ("Curious", "Inquisitive", "Indifferent"),
+      ("Deep", "Profound", "Shallow"),
+      ("Proud", "Confident", "Ashamed"),
+      ("Polite", "Courteous", "Rude"),
+      ("Elusive", "Evasive", "Obvious"),
+      ("Precise", "Exact", "Vague"),
+      ("Tough", "Sturdy", "Fragile"),
+      ("Eager", "Keen", "Reluctant")
+   ],
+   "hard": [
+      ("Ephemeral", "Transient", "Perpetual"),
+      ("Maelstrom", "Turmoil", "Tranquil"),
+      ("Obsequious", "Sycophantic", "Contemptuous"),
+      ("Eloquent", "Articulate", "Incoherent"),
+      ("Diligent", "Industrious", "Indolent"),
+      ("Frugal", "Thrifty", "Wasteful"),
+      ("Conceited", "Imperious", "Humble"),
+      ("Elucidate", "Clarify", "Obfuscate"),
+      ("Intrepid", "Dauntless", "Pusillanimous"),
+      ("Exultant", "Jubilant", "Melancholic"),
+      ("Antediluvian", "Obsolete", "Voguish"),
+      ("Ostentatious", "Flamboyant", "Austere"),
+      ("Meticulous", "Punctilious", "Negligent"),
+      ("Gregarious", "Convivial", "Reticent"),
+      ("Impartial", "Nonpartisan", "Prejudiced"),
+      ("Perspicacious", "Astute", "Barmy"),
+      ("Clandestine", "Surreptitious", "Overt"),
+      ("Phlegmatic", "Placid", "Mercurial"),
+      ("Lethargic", "Torpid", "Zestful"),
+      ("Amicable", "Cordial", "Hostile")
+   ]
+   }
+
         difficulty_levels = ["easy", "medium", "hard"]
         for level in difficulty_levels:
             valid_q_words = {word[0] for word in wordbank[level]}
