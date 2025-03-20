@@ -303,32 +303,6 @@ class Tests:
         match = re.search(r"(\d+)%", captured.out)
 
         assert int(score_earned/num_questions * 100) == int(match.group(1)), f"Expected calculated score of {int(score_earned * 100/num_questions)}%, received {int(match.group(1))}%"
-
-
-
-    def test_play_science(self):
-        # WIP
-        # # test on easy mode with a random number of questions
-        # num_questions = random.randint(1, 10)
-        # num_correct = package.play_science("easy", num_questions)
-        # expected = num_questions
-        # actual = num_correct
-        # assert expected == actual
-        
-        # # test on hard mode with a random number of questions
-        # num_questions = random.randint(1, 10)
-        # num_correct = package.play_science("hard", num_questions)
-        # expected = num_questions
-        # actual = num_correct
-        # assert expected == actual
-        
-        # # test on mix mode with a random number of questions
-        # num_questions = random.randint(1, 10)
-        # num_correct = package.play_science("mix", num_questions)
-        # expected = num_questions
-        # actual = num_correct
-        # assert expected == actual
-        pass
     
     def test_num_questions_science(self, capsys):
         package.play_science(num_questions=11)

@@ -84,10 +84,10 @@ def main():
                 print("That's not a valid integer. Please try again.")
         print()
         package.play_science(num_questions=num_qs, difficulty=num_select[difficulty])
-    elif game_select == '5':
+    elif game_select == 5:
         return 
     else:
-            print('bugged')
+        print('bugged')
 
 
 if __name__ == "__main__":
