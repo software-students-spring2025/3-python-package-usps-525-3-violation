@@ -58,9 +58,65 @@ def play_math(level, num_questions):
    print(f"Elapsed time: {elapsed_time:.1f} seconds")
    return num_correct
 
+def play_geo(numOfQuestions=15, difficulty="easy"):
+    if difficulty != "easy":
+        print("Please begin with the easy level.")
+        return
 
-def play_geo():
-   pass
+    questions = {
+        1: "What is the capital of Germany?",
+        2: "What continent is home to the Sahara Desert?",
+        3: "Which country has the largest population in the world?",
+        4: "What U.S. state is known for its production of cheese?",
+        5: "What is the name of the mountain range that separates Europe and Asia?",
+        6: "What ocean borders the eastern coast of the United States?",
+        7: "What is the capital of Argentina?",
+        8: "What country is home to the ancient city of Petra?",
+        9: "Which major river flows through the city of London?",
+        10: "What continent is the coldest on Earth?",
+        11: "What African country is famous for its pyramids?",
+        12: "What is the capital of Japan?",
+        13: "Which U.S. state is famous for its large potato production?",
+        14: "What ountry is home to the Taj Mahal?",
+        15: "What is the name of the sea located between Europe and Africa?"
+    }
+
+    answers = {
+        1: "Berlin",
+        2: "Africa",
+        3: "China",
+        4: "Wisconsin",
+        5: "Ural Mountains",
+        6: "Atlantic",
+        7: "Buenos Aires",
+        8: "Jordan",
+        9: "Thames",
+        10: "Antarctica",
+        11: "Egypt",
+        12: "Tokyo",
+        13: "Idaho",
+        14: "India",
+        15: "Mediterranean Sea"
+    }
+
+    selectedAnswer = random.sample(list(questions.keys()), numOfQuestions)
+    correct = 0
+    total = 0
+
+    for i in selectedAnswer:
+        print(questions[i])
+        ans = input("Your answer: ").strip().title()
+
+        if ans == answers[i]:
+            print("Correct!")
+            correct += 1
+        else:
+            print(f"Incorrect! The correct answer was {answers[i]}.")
+        print()
+        total += 1
+
+    print(f"Your final score: {correct}/{total} ({int(correct * 100 / total)}%)")
+    return correct
 
 
 def play_vocab(level, mode, num_questions):
