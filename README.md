@@ -90,3 +90,57 @@ PYTHONPATH=src pipenv run pytest --cov=packagepackage --cov-report=term-missing
 - instructions for how to configure and run all parts of your project for any developer on any platform - these instructions must work!
 - instructions for how to set up any environment variables and import any starter data into the database, as necessary, for the system to operate correctly when run.
 - if there are any "secret" configuration files, such as `.env` or similar files, that are not included in the version control repository, examples of these files, such as `env.example`, with dummy data must be included in the repository and exact instructions for how to create the proper configuration files and what their contents should be must be supplied to the course admins by the due date.
+
+## Function usages and examples:
+
+### play_math
+what does the code do
+exceptions thrown:
+
+| Argument    | Type | Description |
+|------------|------|-------------|
+| `arg1`  | `datatype`  | wordwords. |
+| `arg2` | `datatype`  | yadayada |
+
+```
+example input output
+```
+
+### play_geo
+what does the code do
+exceptions thrown:
+
+| Argument    | Type | Description |
+|------------|------|-------------|
+| `arg1`  | `datatype`  | wordwords. |
+| `arg2` | `datatype`  | yadayada |
+
+```
+example input output
+```
+
+### play_vocab
+what does the code do
+exceptions thrown:
+
+| Argument    | Type | Description |
+|------------|------|-------------|
+| `arg1`  | `datatype`  | wordwords. |
+| `arg2` | `datatype`  | yadayada |
+
+```
+example input output
+```
+
+### play_science
+what does the code do
+exceptions thrown:
+
+| Argument    | Type | Description |
+|------------|------|-------------|
+| `arg1`  | `datatype`  | wordwords. |
+| `arg2` | `datatype`  | yadayada |
+
+```
+example input output
+```
