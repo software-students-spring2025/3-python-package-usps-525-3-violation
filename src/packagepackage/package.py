@@ -101,21 +101,21 @@ def play_geo(numOfQuestions=15, difficulty="easy"):
         },
 
         "hard": {
-            31: "Which country has the highest number of UNESCO World Heritage Sites?",
-            32: "Which city is home to the world's busiest airport by passenger traffic?",
-            33: "What is the name of the deepest trench in the world?",
-            34: "Which African country was never colonized by a European power?",
-            35: "Which U.S. state has the most national parks?",
-            36: "Which island country has the most active volcanoes?",
-            37: "What is the capital of Bhutan?",
-            38: "Which country has the highest average altitude?",
-            39: "Which river is known as the 'River of Five Colors'?",
-            40: "Which desert covers most of Mongolia?",
-            41: "What is the largest landlocked country in the world?",
-            42: "Which country has the oldest continuously used national flag?",
-            43: "Which country has the most time zones?",
-            44: "Which sea is known for being the saltiest natural lake in the world?",
-            45: "Which U.S. city has the highest population density?"
+            31: "What country has the longest uninterrupted coastline?",
+            32: "What city has the most bridges in the world?",
+            33: "What is the oldest active volcano on Earth?",
+            34: "What African country has the longest coastline?",
+            35: "What U.S. state has the most islands?",
+            36: "What island nation has the most languages spoken?",
+            37: "What is the capital of the country that has the highest capital city by elevation?",
+            38: "What country has the lowest average elevation?",
+            39: "What river is the only one to flow north in the United States?",
+            40: "What desert is the largest cold desert in the world?",
+            41: "What country has the most mountains by total land area?",
+            42: "What country is home to the world's highest waterfall?",
+            43: "What country spans the most degrees of longitude?",
+            44: "What body of water has the highest evaporation rate on Earth?",
+            45: "What city is known for being the highest permanently inhabited place on Earth?"
         }
     }
 
@@ -157,21 +157,21 @@ def play_geo(numOfQuestions=15, difficulty="easy"):
         },
 
         "hard": {
-            31: "Italy",
-            32: "Atlanta",
-            33: "Mariana Trench",
-            34: "Ethiopia",
-            35: "California",
-            36: "Indonesia",
-            37: "Thimphu",
-            38: "Bhutan",
-            39: "Cano Cristales",
-            40: "Gobi Desert",
-            41: "Kazakhstan",
-            42: "Denmark",
+            31: "Canada",
+            32: "Hamburg",
+            33: "Mount Etna",
+            34: "Madagascar",
+            35: "Alaska",
+            36: "Papua New Guinea",
+            37: "La Paz",
+            38: "Maldives",
+            39: "New River",
+            40: "Antarctic Desert",
+            41: "Nepal",
+            42: "Venezuela",
             43: "France",
-            44: "Dead Sea",
-            45: "New York City"
+            44: "Lake Assal",
+            45: "La Rinconada"
         }
     }
 
@@ -186,6 +186,7 @@ def play_geo(numOfQuestions=15, difficulty="easy"):
         if ans == answers[difficulty][i]:
             print("Correct!")
             correct += 1
+            
         else:
             print(f"Incorrect! The correct answer was {answers[difficulty][i]}.")
 
