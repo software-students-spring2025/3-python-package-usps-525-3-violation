@@ -9,7 +9,7 @@ An exercise to create a Python package, build it, test it, distribute it, and us
 - [Joylyn Gong](https://github.com/joylyngong)
 
 ## Badge
-When done with [badge](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge), PUT HERE!!!
+![Python build & test](https://github.com/nyu-software-engineering/3-python-package-usps-525-3-violation/actions/workflows/build.yaml/badge.svg)
 
 ## Description
 
