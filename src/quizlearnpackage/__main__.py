@@ -4,7 +4,7 @@ In Python packages, this file called __main__.py is run when the package is run
 directly from command line, as opposed to importing it into another program.
 """
 
-import packagepackage.package as package
+import quizlearnpackage.quizlearn as quizlearn
 
 def main():
 
@@ -37,7 +37,7 @@ def main():
                 break  
             except ValueError:
                 print("That's not a valid integer. Please try again.")
-        package.play_math(num_select[int(difficulty)], int(num_qs))
+        quizlearn.play_math(num_select[int(difficulty)], int(num_qs))
         
     elif game_select == 2:
         print("Which difficulty would you like to play?")
@@ -59,7 +59,7 @@ def main():
         while num_questions not in [str(i) for i in range(1, 16)]:
            num_questions = input("Invalid input. Please enter an integer between 1 to 15 (inclusive): ")
 
-        package.play_vocab(level_select[level], mode_select[mode], int(num_questions))
+        quizlearn.play_vocab(level_select[level], mode_select[mode], int(num_questions))
       
     elif game_select == 3:
         pass
@@ -83,7 +83,7 @@ def main():
             except ValueError:
                 print("That's not a valid integer. Please try again.")
         print()
-        package.play_science(num_questions=num_qs, difficulty=num_select[difficulty])
+        quizlearn.play_science(num_questions=num_qs, difficulty=num_select[difficulty])
     elif game_select == 5:
         return 
     else:

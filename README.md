@@ -1,4 +1,4 @@
-![PackagePackage CI/CD](https://github.com/software-students-spring2025/3-python-package-usps-525-3-violation/actions/workflows/build.yaml/badge.svg)
+![Quizlearn CI/CD](https://github.com/software-students-spring2025/3-python-package-usps-525-3-violation/actions/workflows/build.yaml/badge.svg)
 
 
 # Python Package Exercise
@@ -49,7 +49,7 @@ pipenv shell
 5. Run example script:
 
 ```
-PYTHONPATH=src python3 -m packagepackage
+PYTHONPATH=src python3 -m quizlearnpackage
 ```
 
 6. Follow instructions and enjoy!
@@ -81,7 +81,7 @@ pipenv shell
 5. Run pytest with coverage reports:
 
 ```
-PYTHONPATH=src pipenv run pytest --cov=packagepackage --cov-report=term-missing
+PYTHONPATH=src pipenv run pytest --cov=quizlearnpackage --cov-report=term-missing
 ```
 
 
@@ -135,7 +135,7 @@ example input output
 ```
 
 ### play_vocab(level, mode, num_questions)
-This function starts a vocab quiz game with words imported from `src/packagepackage/wordbank.py`. Users can choose between three difficulties -- easy, medium, and hard -- and between three gamemodes -- synonyms only, antonyms only, or both. Users can also choose a number of questions to be asked between 1 through 15. There are 20 synonym/antonym tuples for each difficulty, and for each question, users can choose between 4 multiple choice answers. At the end, the score is printed. Users interact with the function via `input()`. Questions are capped at 15 to prevent the same words from appearing too many times in one game session.
+This function starts a vocab quiz game. Users can choose between three difficulties -- easy, medium, and hard -- and between three gamemodes -- synonyms only, antonyms only, or both. Users can also choose a number of questions to be asked between 1 through 15. There are 20 synonym/antonym tuples for each difficulty, and for each question, users can choose between 4 multiple choice answers. At the end, the score is printed. Users interact with the function via `input()`. Questions are capped at 15 to prevent the same words from appearing too many times in one game session.
 
 Exceptions raised:
 - `ValueError("Invalid difficulty")`: `level` outside of `['easy', 'medium', 'hard']`
